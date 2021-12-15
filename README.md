@@ -1,7 +1,6 @@
 # lab04 Diseño de banco de Registro
-
-Escriba la documentación respectiva 
-#Comentarios y compresion del banco de registros en verilog
+* Abraham Felipe Másmela Ramirez
+# Comentarios y compresion del banco de registros en verilog
 
 ```verilog
 module BancoRegistro #(      		 //   #( Parametros
@@ -24,7 +23,7 @@ module BancoRegistro #(      		 //   #( Parametros
     );
 
 // La cantdiad de registros es igual a: 
-localparam NREG = 2 ** BIT_ADDR; //constante que no se modifica
+localparam NREG = 2 ** BIT_ADDR; //constante que no se modifica (corregir, solo deben ser 8)
   
 //configiración del banco de registro 
 reg [BIT_DATO-1: 0] breg [NREG-1:0];
