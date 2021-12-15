@@ -2,6 +2,7 @@
 * Abraham Felipe Másmela Ramirez
 # Comentarios y compresion del banco de registros en verilog
 
+## Primer codigo (corregir algunas partes)
 ```verilog
 module BancoRegistro #(      		 //   #( Parametros
          parameter BIT_ADDR = 8,  //   BIT_ADDR Número de bit para la dirección
