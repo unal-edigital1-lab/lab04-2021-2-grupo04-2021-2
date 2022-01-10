@@ -1,48 +1,50 @@
 `timescale 1ns / 1ps
-module display(
-    input [15:0] num,
-    input clk,
-    output [0:6] sseg,
-    output reg [3:0] an,
-	 input rst
+
+module display(//entran 6 numeros que seran represetnados en 6 displays
+    //input [15:0] num, //arreglo de 16 digitos que en realidad son 4 numeros en BCD
+	 input [3:0] datA,
+	 input [3:0]datB,
+	 input [3:0] addrRa,
+	 input [3:0]addrRb,
+	 input [3:0]datW,
+	 input [3:0]addrW,
+    input clk, // //reloj
+    output [6:0] sseg, //Arreglo de 7 bits para prender los leds de los displays
+    output reg [5:0] an, //Arreglo de 6 bits para prender y apagar los 6 displays
+	 //input rst,
+	 output led
     );
 
 
 
 reg [3:0]bcd=0;
+//wire [15:0] num=16'h4321;
  
-BCDtoSSeg bcdtosseg(.BCD(bcd), .SSeg(sseg));
+BCDtoSSeg bcdtosseg(.BCD(bcd), .SSeg(sseg));//implementacion del modulo BCDtoSSeg
 
 reg [26:0] cfreq=0;
 wire enable;
 
 // Divisor de frecuecia
 
-assign enable = cfreq[16];
+assign enable = cfreq[16]; //aumento numero, disminuyo velocidad, aumenta periodo
 assign led =enable;
-always @(posedge clk) begin
-  if(rst==1) begin
-		cfreq <= 0;
-	end else begin
-		cfreq <=cfreq+1;
-	end
+always @(posedge clk) begin //Se ejecutara el procedimiento cuando detecte flanco positivo del reloj.
+	cfreq <=cfreq+1;
 end
 
-reg [1:0] count =0;
-always @(posedge enable) begin
-		if(rst==1) begin
-			count<= 0;
-			an<=4'b1111; 
-		end else begin 
-			count<= count+1;
-			an<=4'b1101; 
-			case (count) 
-				2'h0: begin bcd <= num[3:0];   an<=4'b1110; end 
-				2'h1: begin bcd <= num[7:4];   an<=4'b1101; end 
-				2'h2: begin bcd <= num[11:8];  an<=4'b1011; end 
-				2'h3: begin bcd <= num[15:12]; an<=4'b0111; end 
-			endcase
-		end
+reg [2:0] count =0;
+always @(posedge enable) begin //Se ejecutara el procedimiento en un flanco positivo del enable.
+		count<= count+1;
+		an<=4'b1101; 
+		case (count) //dependiendo del Count se le asigna al bcd un agrupamiento de 4 bits contenidos en num
+			2'h0: begin bcd <= datA;   an<=6'b111110; end 
+			2'h1: begin bcd <= datB;   an<=6'b111101; end 
+			2'h2: begin bcd <= addrRa; an<=6'b111011; end 
+			2'h3: begin bcd <= datW;   an<=6'b110111; end 
+			2'h4: begin bcd <= addrRb; an<=6'b101111; end 
+			2'h5: begin bcd <= addrRb; an<=6'b011111; end 
+		endcase
 end
 
 endmodule
