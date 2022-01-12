@@ -277,9 +277,12 @@ module TestBench;
       
 endmodule
 ```
+## documento .txt de precarga
+![txt ](https://github.com/unal-edigital1-lab/lab04-2021-2-grupo04-2021-2/blob/master/figures/Texto%20de%20carga.PNG)
+
 ## Representacion en la tarjeta FPGA
 
-![simulacion ](https://github.com/unal-edigital1-lab/lab02-2021-2-grupo-04-2021-2/blob/master/figures/implementacion9214.jpeg)
+![simulacion ](https://github.com/unal-edigital1-lab/lab04-2021-2-grupo04-2021-2/blob/master/figures/imagen%20tarjeta.jpeg)
 
 
 
