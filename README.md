@@ -277,6 +277,11 @@ module TestBench;
       
 endmodule
 ```
-## Codigo del modulo TestBench
+## Representacion en la tarjeta FPGA
+
+![simulacion ](https://github.com/unal-edigital1-lab/lab02-2021-2-grupo-04-2021-2/blob/master/figures/implementacion9214.jpeg)
+
+
+
 El video del funcionamiento del banco de registros en la fpga
 <https://youtu.be/m0D_aaN-RmQ>
