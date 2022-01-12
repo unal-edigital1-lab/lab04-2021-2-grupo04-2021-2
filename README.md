@@ -277,3 +277,6 @@ module TestBench;
       
 endmodule
 ```
+## Codigo del modulo TestBench
+El video del funcionamiento del banco de registros en la fpga
+<https://youtu.be/m0D_aaN-RmQ>
