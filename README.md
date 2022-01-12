@@ -286,5 +286,5 @@ endmodule
 
 
 
-El video del funcionamiento del banco de registros en la fpga
+El video del funcionamiento del banco de registros en la fpga es:
 <https://youtu.be/m0D_aaN-RmQ>
