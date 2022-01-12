@@ -27,7 +27,7 @@ module TestBench;
 	// Inputs
 	reg [3:0] addrRa;
 	reg [3:0] addrRb;
-	reg [3:0] addrW;
+	reg [4:0] addrW;
 	reg [3:0] datW;
 	reg RegWrite;
 	reg clk;
@@ -36,11 +36,6 @@ module TestBench;
 	// Outputs
 	wire [3:0] datOutRa;
 	wire [3:0] datOutRb;
-	//extras
-	
-	wire [6:0] sseg;
-	//output reg [5:0] an,
-	wire led;
 
 	// Instantiate the Unit Under Test (UUT)
 	BancoRegistro uut (
@@ -52,10 +47,7 @@ module TestBench;
 		.datW(datW), 
 		.RegWrite(RegWrite), 
 		.clk(clk), 
-		.rst(rst),
-		.sseg(sseg),
-		.led(led),
-		
+		.rst(rst)
 	);
 
 	initial begin
@@ -64,53 +56,20 @@ module TestBench;
 		addrRb = 0;
 		addrW = 0;
 		datW = 0;
-		RegWrite = 1;
-		clk = 0;
-		rst = 1;
-		#5;
-		
-		
-		
-		//escritura de 8 registros
 		RegWrite = 0;
-		
-		addrW =4'b0000; //0
-		datW =4'b0010; //2
-		#5;
-		addrW =4'b0001; //1
-		datW =4'b1001; //9
-		#5;
-		addrW =4'b0010; //2
-		datW =4'b0001; //1
-		#5;
-		addrW =4'b0011; //3
-		datW =4'b0011; //3
-		#5;
-		addrW =4'b0100; //4
-		datW =4'b0101; //5
-		#5;
-		addrW =4'b0101; //5
-		datW =4'b0111; //7
-		#5;
-		addrW =4'b0110; //6
-		datW =4'b0001; //1
-		#5
-		addrW =4'b0111; //7
-		datW =4'b1000; //8
-		
-		
-		
+		clk = 0;
+		rst = 0;
+
 		// Wait 100 ns for global reset to finish
-		//lecctura de los 8 registros completos
 		#100;
-      for (addrRa = 0; addrRa < 4; addrRa = addrRa + 1) begin
-			#5 addrRb=addrRa+4;
-			 $display("el valor de registro %d =  %d y el valor de registro %d = %d", addrRa,datOutRa,addrRb,datOutRb) ;
-		end
+      for (addrRa = 0; addrRa < 8; addrRa = addrRa + 1) begin
+			#5 addrRb=addrRa+8;
+			 $display("el valor de registro %d =  %d y %d = %d", addrRa,datOutRa,addrRb,datOutRb) ;
+    end
+	 
+		
 		
 	end
-	//relog que cambia
-	 
-	 always #1 clk = ~clk;
       
 endmodule
+

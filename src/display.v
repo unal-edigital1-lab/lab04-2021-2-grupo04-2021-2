@@ -41,9 +41,12 @@ always @(posedge enable) begin //Se ejecutara el procedimiento en un flanco posi
 			2'h0: begin bcd <= datA;   an<=6'b111110; end 
 			2'h1: begin bcd <= datB;   an<=6'b111101; end 
 			2'h2: begin bcd <= addrRa; an<=6'b111011; end 
-			2'h3: begin bcd <= datW;   an<=6'b110111; end 
-			2'h4: begin bcd <= addrRb; an<=6'b101111; end 
-			2'h5: begin bcd <= addrRb; an<=6'b011111; end 
+			2'h3: begin bcd <= addrRb; an<=6'b110111; end 
+			2'h4: begin bcd <= datW;   an<=6'b101111; end 
+			2'h5: begin bcd <= addrW;  an<=6'b011111; end 
+			//numeros extra
+			2'h6: begin bcd <= datA;   an<=6'b111110; end
+			2'h7: begin bcd <= datB;   an<=6'b111101; end 
 		endcase
 end
 

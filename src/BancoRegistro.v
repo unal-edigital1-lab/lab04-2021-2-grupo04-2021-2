@@ -15,12 +15,12 @@
 //
 // Revision: 
 // Revision 0.01 - File Created
-// Additional Comments: 
+// Additional Comments: 0
 //
 //////////////////////////////////////////////////////////////////////////////////
 module BancoRegistro #(      		 //   #( Parametros
-         parameter BIT_ADDR = 4,  //   BIT_ADDR Número de bit para la dirección
-         parameter BIT_DATO = 4  //  BIT_DATO  Número de bit para el dato
+         parameter BIT_ADDR = 4,  //   BIT_ADDR Números de bit para la dirección
+         parameter BIT_DATO = 4  //  BIT_DATO  Números de bits para el dato
 	)
 	(
     input [BIT_ADDR-1:0] addrRa, //direcciones de los  2 registros que se leen simultaneamente
@@ -37,12 +37,12 @@ module BancoRegistro #(      		 //   #( Parametros
     input rst, // opcion para resetear cada registro //boton
 	 
 	 output [6:0] sseg,
-	 //output reg [5:0] an,
+	 output [5:0] an,
 	 output led
     );
 
 // La cantdiad de registros es igual a: 
-localparam NREG = 2 ** (BIT_DATO-1); //constante que no se modifica
+localparam NREG = 2 ** (BIT_ADDR-1); //constante que no se modifica
   
 //configiración del banco de registro 
 reg [BIT_DATO-1: 0] breg [NREG-1:0];
@@ -54,15 +54,14 @@ assign  datOutRb = breg[addrRb];
 always @(posedge clk) begin //se ejecuta con cada flanco positivo del relog
 	if (RegWrite == 0) //si se oprime el boton regWrite con el 1 se guarda la informacion en un registro espefico
      breg[addrW] <= datW;
+	  
 	if (rst == 0)begin //si se oprime el boton reset todos los elementos de los registros se igualan a 0
-		breg[0] <= 0;
-		breg[1] <= 0;
-		breg[2] <= 0;
-		breg[3] <= 0;
-		breg[4] <= 0;
-		breg[5] <= 0;
-		breg[6] <= 0;
-		breg[7] <= 0;
+		reg [BIT_ADDR-1:0] contador =0;
+		repeat (NREG) begin 
+			breg[contador] <= 0;
+			contador = contador +1;
+		end
+		
 	end
 	
 		
@@ -71,6 +70,5 @@ always @(posedge clk) begin //se ejecuta con cada flanco positivo del relog
 
   //instancia del modulo de display
   
-display disp(.datA(datOutRa), .datB(datOutRb), .addrRa(addrRa), .addrRb(addrRb), .datW(datW), .addrW(addrW), .clk(clk), .sseg(sseg), .led(led));
+display disp(.datA(datOutRa), .datB(datOutRb), .addrRa(addrRa), .addrRb(addrRb), .datW(datW), .addrW(addrW), .clk(clk), .sseg(sseg), .an(an), .led(led));
 endmodule
-
