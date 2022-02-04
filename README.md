@@ -1,6 +1,7 @@
 # lab04 Diseño de banco de Registro
 * Abraham Felipe Másmela Ramirez
 * Omar David Acosta Zambrano
+* Samuel Eduardo Ramos Gonzalez
 # Comentarios y compresion del banco de registros en verilog
 
 ## Codigo del modulo BancoRegistroTotal
